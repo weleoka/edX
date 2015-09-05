@@ -51,11 +51,12 @@ For example, if s = 'azcbobobegghakl', then your program should print: beggh
 In the case of ties, print the first substring. 
 For example, if s = 'abcbcd', then your program should print: abc
 """
+s = 'zyxwvutsrqponmlkjihgfedcba'
+# s = "aabobhtelboboabcdefghijklmnopbsssarrcefghijabcdssssss"
 sLi = [letter for letter in s]
 alphabet = [x for x in "abcdefghijklmnopqrstuvwxyz"]
 aLi_tup = [(x, y) for x, y in enumerate(alphabet)]
 
-# s = "aabobhtelboboabcdefghijklmnopbsssarrcefghijabcdssssss"
 temp = []
 data =[]
 last = 0
@@ -74,10 +75,7 @@ for item in sLi:
         temp.append(item)
 
     elif current < last:
-
-        if len(temp) > 1:
-            data.append(''.join(temp))
-
+        data.append(''.join(temp))
         temp = []
         temp.append(item)
 
@@ -86,7 +84,16 @@ for item in sLi:
 data.append(''.join(temp))  # To include the last set.
 
 ### Not quite good here because if there is a tie then what...
-# Because its already sorted, but it should be listed in order of apperance in the string!
-data.sort(key=lambda item: (-len(item), item))
+# Because its already sorted, but it should instead then be listed in order of apperance in the string!
+# data.sort(key=lambda item: (-len(item), item))
 
-print "(3) NULL. %s" % data
+## Better solution look for longest string.
+i = 0
+for substr in data:
+    substr_len = len (substr)
+    if substr_len > i:
+        winner = substr
+        i = substr_len
+
+
+print "(3) Longest alphabetically ordered substring in s is: %s" % winner
